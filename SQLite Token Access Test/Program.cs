@@ -44,6 +44,24 @@ namespace SQLite_Token_Access_Test
                     );
             }
 
+            // Insert the hex strings we're searching for here in "FindTokenByHex()".
+            returnedToken = SqliteDataAccess.FindTokenByHex("00", "BB"); //  0x0012 or 0x00, 0x12 is the hex value correspoding to the integer 18
+
+            // DEBUG: Get some feedback to see if it worked.
+            foreach (var token in returnedToken)
+            {
+                Console.WriteLine
+                    (
+                    "\n\nSearch by String\n----------------\n"
+                    + token
+                    + "\nInteger: " + token.Integer.ToString()
+                    + "\nByteHigh: " + token.HighByte
+                    + "\nByteLow: " + token.LowByte
+                    + "\nString: " + token.String
+                    );
+            }
+
+
             // Prevent console window from closing. Press enter to exit.
             Console.Read();
         }

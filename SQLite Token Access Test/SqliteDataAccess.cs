@@ -37,16 +37,31 @@ namespace SQLite_Token_Access_Test
         /// <returns>A list element.</returns>
         public static List<TokenModel> FindTokenByString(string tokenString = "")
         {
-            string sqlFindTokenByInteger = "select * from Tokens where String is \"" + tokenString + "\"";
+            string sqlFindTokenByString = "select * from Tokens where String is \"" + tokenString + "\"";
 
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TokenModel>(sqlFindTokenByInteger, new DynamicParameters());
+                var output = cnn.Query<TokenModel>(sqlFindTokenByString, new DynamicParameters());
                 return output.ToList();
             }
         }
 
-
+        /// <summary>
+        /// This function takes two arguements of type "string".
+        /// The strings given correspond to the hex values of the Token in the DB.
+        /// </summary>
+        /// <param name="HighByte">This is the first byte.</param>
+        /// <param name="LowByte">This is the second byte.</param>
+        /// <returns>A list element.</returns>
+        public static List<TokenModel> FindTokenByHex(string HighByte, string LowByte)
+        {
+            string sqlFindTokenByHex = "select * from Tokens where HighByte = \"" + HighByte + "\" and LowByte = \"" + LowByte + "\"";
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<TokenModel>(sqlFindTokenByHex, new DynamicParameters());
+                return output.ToList();
+            }
+        }
 
         private static string LoadConnectionString(string id = "Default")
         {
