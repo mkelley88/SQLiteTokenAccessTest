@@ -11,7 +11,7 @@ namespace SQLite_Token_Access_Test
         static void Main(string[] args)
         {
             // Insert the integer we're searching for here in "LoadToken()".
-            List<TokenModel> returnedToken = SqliteDataAccess.LoadToken(20);
+            List<TokenModel> returnedToken = SqliteDataAccess.FindTokenByString("round(");
 
             // DEBUG: Get some feedback to see if it worked.
             foreach (var item in returnedToken)
